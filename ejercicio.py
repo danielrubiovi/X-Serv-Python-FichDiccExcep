@@ -1,13 +1,23 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# hola, hola
+fich = open ("/etc/passwd", 'r')
+lineas = fich.readlines()
+dicc = {}
 
-fd = open('/etc/passwd', 'r')
+for line in lineas:
+	lista_lineas = line.split(':')
+	clave = lista_lineas[0]
+	valor_shell = lista_lineas[-1][:-1]
+	dicc[clave] = valor_shell
+print "El valor de 'root':", dicc['root']
 
-lineas = fd.readlines()
-fd.close()
+try:
+	print "El valor de 'imaginario':", dicc['imaginario']
+except KeyError:
+	print "Clave no encontrada en la biblioteca"
 
-for linea in lineas:
-    elementos = linea.split(':')
-    print elementos[0], elementos[-1][:-1]
+print "\nNumero de lineas:", len(lineas)
+
+	
+
